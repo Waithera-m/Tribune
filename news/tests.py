@@ -71,18 +71,39 @@ class TagsTestClass(TestCase):
 class ArticleTestClass(TestCase):
     
     def setUp(self):
-        
+
         """
         method runs before each test
         """
-        self.mary= Editor(first_name='Mary',last_name='Njihia',email='njihiamary1@gmail.com')
+        # Creating a new editor and saving it
+        self.mary = Editor(first_name='Mary',last_name='Njihia',email='njihiamary1@gmail.com')
         self.mary.save_editor()
 
-        self.tags = tags(name="testing")
+        # Creating a new tag and saving it
+        self.new_tag = tags(name = 'testing')
+        self.new_tag.save()
 
-        self.new_article= Article(title = 'Test Article',post = 'This is a random test Post',editor=self.mary,tag=self.tag)
-
+        self.new_article= Article(title = 'Test Article',post = 'This is a random test Post',editor = self.mary)
         self.new_article.save()
+
+        self.new_article.tags.add(self.new_tag)
+
+    def tearDown(self):
+
+        """
+        method runs after all tests
+        """
+        Editor.objects.all().delete()
+        tags.objects.all().delete()
+        Article.objects.all().delete()
+    
+    def test_get_news_today(self):
+
+        """
+        method tests class retrieval functionality
+        """
+        today_news = Article.todays_news()
+        self.assertTrue(len(today_news)>0)
     
     
 
