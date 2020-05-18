@@ -55,7 +55,17 @@ class TagsTestClass(TestCase):
             """
             method runs before each test
             """
-            tags.objects.create(name="testing")
+            self.tag = tags(name="Testing")
+        
+        def test_save_tag(self):
+
+            """
+            methods tests class save functionality
+            """
+            self.tag.save_tag()
+            tag = tags.objects.all()
+            self.assertTrue(len(tag)>0)
+
 
 
 class ArticleTestClass(TestCase):
@@ -70,7 +80,7 @@ class ArticleTestClass(TestCase):
 
         self.tags = tags(name="testing")
 
-        self.new_article= Article(title = 'Test Article',post = 'This is a random test Post',editor=self.mary,tags=self.tags)
+        self.new_article= Article(title = 'Test Article',post = 'This is a random test Post',editor=self.mary,tag=self.tag)
 
         self.new_article.save()
     
