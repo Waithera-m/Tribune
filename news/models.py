@@ -52,11 +52,12 @@ class tags(models.Model):
         self.save()
 
 class Article(models.Model):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=70)
     post = models.TextField()
     editor = models.ForeignKey(Editor, on_delete=models.CASCADE)
     tags = models.ManyToManyField(tags)
     pub_date = models.DateTimeField(auto_now_add=True)
+    article_image = models.ImageField(upload_to='articles/%Y/%m/%d')
 
     @classmethod
     def todays_news(cls):
@@ -81,6 +82,8 @@ class Article(models.Model):
     def search_by_title(cls,search_term):
         articles = cls.objects.filter(title__icontains=search_term)
         return articles
+    
+    
 
     
     
