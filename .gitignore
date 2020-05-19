@@ -2,4 +2,6 @@ virtual/
 
 __pycache__/
 
+*pyc
+
 .venv
