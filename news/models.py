@@ -68,5 +68,14 @@ class Article(models.Model):
         news = cls.objects.filter(pub_date__date = today)
         return news
 
+    @classmethod
+    def days_news(cls,date):
+
+        """
+        function returns news published on a given day
+        """
+        news = cls.objects.filter(pub_date__date = date)
+        return news
+
     
     
