@@ -1,0 +1,28 @@
+{% extends 'all-news/base.html'%}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid"></div>
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-sm-9">
+                {% if articles %}
+                    <h3>Found {{articles|length}} of searched term {{message}}</h3>
+                {% else %}
+                    <h3>Found 0 articles for the search term. {{message}}</h3>
+                {% endif %}
+                <hr>
+            </div>
+            <div class="col-md-4 col-sm-3"></div>
+        </div>
+        <div class="row">
+            {% if articles %}
+                {% for article in articles %}
+                <div class="col-sm-6 col-md-4">
+                    <h4>{{article.title}}</h4>
+                    <p>{{article.post}}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
