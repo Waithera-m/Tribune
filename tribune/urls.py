@@ -20,4 +20,5 @@ from django.urls import path,include
 urlpatterns = [
     path('', include('news.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django_registration.backends.one_step.urls'))
 ]

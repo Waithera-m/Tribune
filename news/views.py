@@ -10,6 +10,8 @@ from .forms import NewsLetterForm
 
 from .email import send_welcome_email
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -77,6 +79,7 @@ def search_results(request):
         message = "Please type a different search term"
         return render(request,'all-news/search.html',{"message":message})
 
+@login_required(login_url='/accounts/login/')
 def article(request,article_id):
 
     try:
