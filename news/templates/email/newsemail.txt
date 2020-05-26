@@ -1,0 +1,6 @@
+Hello {{name}}
+
+Welcome to TheMoringaTribune. You will receive a newsletter detailing different aspects that define the Moringa experience.
+
+Kind Regards,
+TheMoringaTribune
