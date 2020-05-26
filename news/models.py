@@ -83,7 +83,12 @@ class Article(models.Model):
         articles = cls.objects.filter(title__icontains=search_term)
         return articles
     
-    
+class NewsLetterRecipients(models.Model):
+    """
+    class facilitates the creation of recipients objects
+    """
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
 
     
     
