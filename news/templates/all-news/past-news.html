@@ -7,8 +7,9 @@
         {% for news_item in news %}
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-3 col-lg-6">
+                    <img src="{{news_item.article_image.url}}" class="img-responsive" alt="" height="300" width="450">
                     <h3 class="text-center">{{news_item.title}}</h3>
-                    <p class="text-left"><i>Written by: {{news_item.editor}}</i></p>
+                    <p class="text-left"><i>Written by: {{news_item.editor__first_name}}</i></p>
                     <p style="text-indent: 30px;">{{news_item.post}}</p>
                 </div>
             </div>

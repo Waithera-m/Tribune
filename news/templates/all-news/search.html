@@ -19,7 +19,9 @@
                 {% for article in articles %}
                 <div class="col-sm-6 col-md-4">
                     <h4>{{article.title}}</h4>
-                    <p>{{article.post}}</p>
+                    {% autoescape on %}
+                        {{article.post|safe}}
+                    {% endautoescape %}
                 </div>
                 {% endfor %}
             {% endif %}

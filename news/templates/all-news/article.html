@@ -7,11 +7,13 @@
             <div class="col-md-8 col-sm-12">
                 <h3 class="text-center">{{article.title}}</h3>
                 <img src="{{article.article_image.url}}" class="img-responsive" alt="" heigth="350" width="800">
-                <p><i>Posted {{article.pub_date|timesince}} ago by {{article.editor.first_name}}</i></p>
+                <p><i>Posted {{article.pub_date|timesince}} ago by {{article.editor__first_name}}</i></p>
             </div>
         </div>
         <div class="row">
-            <p style="text-indent: 30px;">{{article.post}}</p>
+            {% autoescape on %}
+                {{article.post|safe}}
+            {% endautoescape %}
         </div>
     </div>
 {% endblock %}
