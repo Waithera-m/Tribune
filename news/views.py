@@ -11,6 +11,7 @@ from .forms import NewsLetterForm, NewsArticleForm
 from .email import send_welcome_email
 
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -52,19 +53,7 @@ def past_days_news(request,past_date):
 def news_today(request):
     date = dt.date.today()
     news = Article.todays_news()
-
-    if request.method == 'POST':
-        form = NewsLetterForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['your_name']
-            email = form.cleaned_data['email']
-            recipient = NewsLetterRecipients(name=name, email=email)
-            recipient.save()
-            send_welcome_email(name,email)
-            HttpResponseRedirect('news_today')
-            print('valid')
-    else:
-        form = NewsLetterForm()
+    form = NewsLetterForm()
     return render(request,'all-news/today-news.html',{"date":date,"news":news, "letterform":form})
 
 def search_results(request):
@@ -105,3 +94,17 @@ def new_article(request):
     else:
         form = NewsArticleForm()
     return render(request, 'news_article.html', {"form":form})
+
+def newsletter(request):
+    """
+    view function facilitates the sending of newsletter emails and saving of new subscribers asychronously
+    """
+    name = request.POST.get('your_name')
+    email = request.POST.get('email')
+
+    recipient = NewsLetterRecipients(name=name, email=email)
+    recipient.save()
+    send_welcome_email(name, email)
+    data = {'success': 'You have beeen added successfully to our mailing list'}
+    return JsonResponse(data)
+
