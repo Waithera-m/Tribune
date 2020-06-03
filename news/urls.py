@@ -12,6 +12,7 @@ urlpatterns=[
     url(r'article/(\d+)', views.article, name='article'),
     path('new/article', views.new_article, name='new_article'),
     path('ajax/newsletter', views.newsletter, name='newsletter'),
+    path('api/merch', views.MerchList.as_view()),
 ]
 
 if settings.DEBUG:
